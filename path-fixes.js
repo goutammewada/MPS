@@ -1,0 +1,1 @@
+const BACKEND = ""; // Leaving it blank automatically routes to the same domain Render gives you

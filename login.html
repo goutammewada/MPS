@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Online | Corporate Admin Gateway Authentication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy-primary: #0B2545;
+            --navy-secondary: #163A60;
+            --saffron-brand: #E8620A;
+            --saffron-light: #FFF0E8;
+            --saffron-dark: #B84D06;
+            --success-green: #1A6B3C;
+            --white: #FFFFFF;
+            --bg-workspace: #F4F6FA;
+            --border-neutral: #E5E7EB;
+            --text-main: #374151;
+            --text-muted: #6B7280;
+            --danger-brand: #B71C1C;
+            --danger-light: #FFF0F0;
+            --danger-border: #FFCDD2;
+            
+            --radius-sm: 8px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { height: 100%; }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            min-height: 100vh;
+            background: var(--navy-primary);
+            display: flex;
+            align-items: stretch;
+            overflow-x: hidden;
+        }
+
+        /* ── LEFT PANEL BRAND ARCHITECTURE ── */
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #061629 0%, var(--navy-primary) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 20% 70%, rgba(232,98,10,0.16) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .lp-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 64px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lp-logo {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--saffron-brand), var(--saffron-dark));
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px; color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(232, 98, 10, 0.2);
+        }
+
+        .lp-brand-text h2 { font-size: 16px; font-weight: 700; color: white; line-height: 1.2; letter-spacing: -0.3px; }
+        .lp-brand-text p { font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+        .lp-headline { position: relative; z-index: 1; }
+        .lp-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #F5A875;
+            margin-bottom: 16px;
+        }
+
+        .lp-headline h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+        }
+
+        .lp-headline h1 em {
+            font-style: normal;
+            color: var(--saffron-brand);
+            background: linear-gradient(to right, #FF8C42, #E8620A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lp-headline p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 360px; }
+
+        .lp-features {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lp-feat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13.5px;
+            color: rgba(255,255,255,0.65);
+        }
+
+        .lp-feat-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--saffron-brand);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--saffron-brand);
+        }
+
+        /* ── RIGHT PANEL PORTAL INTERFACE ── */
+        .right-panel {
+            width: 480px;
+            flex-shrink: 0;
+            background: var(--bg-workspace);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 48px;
+            border-left: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .login-box { width: 100%; max-width: 360px; }
+        .login-box-header { margin-bottom: 36px; }
+        .login-box-header h3 { font-size: 24px; font-weight: 700; color: var(--navy-primary); margin-bottom: 6px; letter-spacing: -0.5px; }
+        .login-box-header p { font-size: 14px; color: var(--text-muted); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .input-wrap { position: relative; }
+        .input-wrap i {
+            position: absolute; left: 14px; top: 50%;
+            transform: translateY(-50%); font-size: 14px;
+            color: var(--text-muted); pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px 12px 42px;
+            border: 1.5px solid var(--border-neutral);
+            border-radius: var(--radius-sm);
+            font-family: 'Sora', sans-serif;
+            font-size: 14px;
+            color: var(--text-main);
+            background: var(--white);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--navy-primary);
+            box-shadow: 0 0 0 3px rgba(11,37,69,0.08);
+            background: white;
+        }
+
+        .form-input.error-state {
+            border-color: var(--danger-brand);
+            box-shadow: 0 0 0 3px rgba(183,28,28,0.08);
+        }
+
+        .toggle-pw {
+            position: absolute; right: 14px; top: 50%;
+            transform: translateY(-50%); background: none;
+            border: none; cursor: pointer; font-size: 14px;
+            color: var(--text-muted); padding: 4px;
+            border-radius: 4px; transition: var(--transition);
+        }
+        .toggle-pw:hover { color: var(--text-main); }
+
+        /* Error Messaging System Components */
+        .error-msg {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: var(--danger-light);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            font-size: 13px;
+            color: var(--danger-brand);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .error-msg.show { display: flex; }
+        .error-msg i { font-size: 14px; flex-shrink: 0; }
+
+        .attempts-row {
+            display: flex; justify-content: flex-end;
+            margin-top: -12px; margin-bottom: 20px;
+        }
+        .attempts-label { font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
+        .attempts-label span { font-weight: 600; color: var(--danger-brand); }
+
+        /* Secure Validation Action Elements */
+        .btn-login {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--navy-primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-family: 'Sora', sans-serif;
+            font-size: 14.5px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 4px;
+            box-shadow: 0 4px 6px -1px rgba(11,37,69,0.1);
+        }
+
+        .btn-login:hover:not(:disabled) { background: var(--navy-secondary); transform: translateY(-1px); }
+        .btn-login:active:not(:disabled) { transform: none; }
+        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .spinner {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Security Branded Lockout Banner Components */
+        .lockout-banner {
+            display: none; background: #FFF8E1; border: 1px solid #FFD54F;
+            border-radius: var(--radius-sm); padding: 14px; font-size: 13px;
+            color: #7A5800; font-weight: 500; margin-bottom: 20px;
+            text-align: center; line-height: 1.5;
+        }
+        .lockout-banner.show { display: block; }
+        .lockout-timer { font-size: 20px; font-weight: 700; color: var(--saffron-dark); display: block; margin-top: 4px; }
+
+        .login-footer { margin-top: 32px; text-align: center; }
+        .login-footer a {
+            font-size: 13px; color: var(--text-muted); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px; transition: var(--transition);
+        }
+        .login-footer a:hover { color: var(--navy-primary); }
+
+        .secure-badge {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; font-size: 11.5px; color: var(--text-muted); margin-top: 24px;
+        }
+        .secure-badge i { color: var(--success-green); font-size: 13px; }
+
+        @media (max-width: 860px) {
+            .left-panel { display: none; }
+            .right-panel { width: 100%; min-height: 100vh; padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="left-panel">
+        <div class="lp-brand">
+            <div class="lp-logo">MP</div>
+            <div class="lp-brand-text">
+                <h2>MP Online Services</h2>
+                <p>State Digital Consultancy Platform</p>
+            </div>
+        </div>
+
+        <div class="lp-headline">
+            <div class="lp-label">Institutional Gateway</div>
+            <h1>Secure Operational<br><em>Dashboard</em> Access</h1>
+            <p>Access processing nodes, verify incoming citizen records, and track live database transactions safely.</p>
+        </div>
+
+        <div class="lp-features">
+            <div class="lp-feat"><div class="lp-feat-dot"></div> Comprehensive application workspace control</div>
+            <div class="lp-feat"><div class="lp-feat-dot"></div> Live state updates via encrypted pipeline channels</div>
+            <div class="lp-feat"><div class="lp-feat-dot"></div> Multi-format matrix report generation grids</div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="login-box">
+
+            <div class="login-box-header">
+                <h3>Admin Gateway Console</h3>
+                <p>Verify administrative security clearance</p>
+            </div>
+
+            <div id="lockoutBanner" class="lockout-banner">
+                Security Lockout Initiated. Please wait:
+                <span class="lockout-timer" id="lockoutTimer">30s</span>
+            </div>
+
+            <div id="errorBox" class="error-msg">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="errorText">Access credentials invalid.</span>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)" novalidate autocomplete="off">
+                <div class="form-group">
+                    <label for="username">System ID / Username</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <input
+                            type="text"
+                            id="username"
+                            class="form-input"
+                            placeholder="Enter username"
+                            required
+                            autocomplete="username"
+                            spellcheck="false"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Gateway Passcode</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-input"
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="attempts-row" id="attemptsRow" style="display:none;">
+                    <span class="attempts-label">Handshake Failures: <span id="attemptsCount">0</span> / 5</span>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <div class="spinner" id="spinner"></div>
+                    <i class="fa-solid fa-shield-halved" id="btnIcon"></i>
+                    <span id="btnText">Verify Clearance</span>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <a href="index.html">
+                    <i class="fa-solid fa-arrow-left"></i> Return to Main Registry
+                </a>
+            </div>
+
+            <div class="secure-badge">
+                <i class="fa-solid fa-circle-shield"></i>
+                256-bit SSL Cryptographic Socket Active
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const MAX_ATTEMPTS = 5;
+        const LOCKOUT_SECONDS = 30;
+
+        let attempts = parseInt(sessionStorage.getItem('login_attempts') || '0');
+        let lockedUntil = parseInt(sessionStorage.getItem('locked_until') || '0');
+        let lockTimer = null;
+
+        const form        = document.getElementById('loginForm');
+        const loginBtn    = document.getElementById('loginBtn');
+        const spinner     = document.getElementById('spinner');
+        const btnIcon     = document.getElementById('btnIcon');
+        const btnText     = document.getElementById('btnText');
+        const errorBox    = document.getElementById('errorBox');
+        const errorText   = document.getElementById('errorText');
+        const lockBanner  = document.getElementById('lockoutBanner');
+        const lockTimerEl = document.getElementById('lockoutTimer');
+        const attemptsRow = document.getElementById('attemptsRow');
+        const attemptsEl  = document.getElementById('attemptsCount');
+        const pwInput     = document.getElementById('password');
+        const userInput   = document.getElementById('username');
+
+        /* Password Visibility Switch Engine */
+        document.getElementById('togglePw').addEventListener('click', () => {
+            const isHidden = pwInput.type === 'password';
+            pwInput.type = isHidden ? 'text' : 'password';
+            document.getElementById('toggleIcon').className = isHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+        });
+
+        function checkLockout() {
+            const now = Date.now();
+            if (lockedUntil > now) {
+                startLockoutUI(Math.ceil((lockedUntil - now) / 1000));
+            }
+        }
+
+        function startLockoutUI(seconds) {
+            loginBtn.disabled = true;
+            lockBanner.classList.add('show');
+            errorBox.classList.remove('show');
+            let remaining = seconds;
+            lockTimerEl.textContent = remaining + 's';
+
+            clearInterval(lockTimer);
+            lockTimer = setInterval(() => {
+                remaining--;
+                lockTimerEl.textContent = remaining + 's';
+                if (remaining <= 0) {
+                    clearInterval(lockTimer);
+                    loginBtn.disabled = false;
+                    lockBanner.classList.remove('show');
+                    attempts = 0;
+                    sessionStorage.setItem('login_attempts', '0');
+                    sessionStorage.removeItem('locked_until');
+                    attemptsRow.style.display = 'none';
+                }
+            }, 1000);
+        }
+
+        function setLoading(on) {
+            spinner.style.display   = on ? 'block' : 'none';
+            btnIcon.style.display   = on ? 'none'  : 'inline-block';
+            btnText.textContent     = on ? 'Verifying Node...' : 'Verify Clearance';
+            loginBtn.disabled       = on;
+        }
+
+        function shakeBox() {
+            const box = document.querySelector('.login-box');
+            box.style.animation = 'none';
+            box.offsetHeight;
+            box.style.animation = 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both';
+        }
+
+        /* ── AUTHENTICATION CONTROL PIPELINE ── */
+        async function handleLogin(event) {
+            event.preventDefault();
+            if (loginBtn.disabled) return;
+
+            const user = userInput.value.trim();
+            const pass = pwInput.value;
+
+            errorBox.classList.remove('show');
+            userInput.classList.remove('error-state');
+            pwInput.classList.remove('error-state');
+
+            setLoading(true);
+            await new Promise(r => setTimeout(r, 800)); // simulate network round-trip delay
+
+            // Static local authentication checkpoint fallback
+            const ok = (user === "admin" && pass === "mp@2026");
+
+            if (ok) {
+                localStorage.setItem('admin_session', 'authenticated_true');
+                btnText.textContent = 'Redirecting...';
+                sessionStorage.removeItem('login_attempts');
+                sessionStorage.removeItem('locked_until');
+                setTimeout(() => { window.location.href = "admin.html"; }, 400);
+            } else {
+                setLoading(false);
+                attempts++;
+                sessionStorage.setItem('login_attempts', attempts);
+                pwInput.value = '';
+                userInput.classList.add('error-state');
+                pwInput.classList.add('error-state');
+                shakeBox();
+
+                if (attempts >= MAX_ATTEMPTS) {
+                    const until = Date.now() + LOCKOUT_SECONDS * 1000;
+                    sessionStorage.setItem('locked_until', until);
+                    lockedUntil = until;
+                    startLockoutUI(LOCKOUT_SECONDS);
+                } else {
+                    const left = MAX_ATTEMPTS - attempts;
+                    errorText.textContent = left === 1
+                        ? 'Clearence denied. 1 final attempt remaining.'
+                        : `Clearance denied. ${left} attempts remaining before system lockout.`;
+                    errorBox.classList.add('show');
+                    attemptsRow.style.display = 'flex';
+                    attemptsEl.textContent = attempts;
+                }
+            }
+        }
+
+        /* ── SHAKE ANIMATION EFFECTS ── */
+        const shakeStyle = document.createElement('style');
+        shakeStyle.textContent = `@keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }`;
+        document.head.appendChild(shakeStyle);
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Enter') form.requestSubmit();
+        });
+
+        checkLockout();
+    </script>
+</body>
+</html>
