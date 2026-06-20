@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MP Online | Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,27 +52,30 @@
         </div>
         <nav class="sidebar-nav">
             <a class="nav-item active" href="admin.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-            <a class="nav-item" href="track.html"><i class="fa-solid fa-magnifying-glass"></i> Track</a>
+            <a class="nav-item" href="track.html"><i class="fa-solid fa-magnifying-glass"></i> Track Status</a>
         </nav>
     </aside>
 
     <div class="main-content">
         <div class="topbar">
-            <h1>Applications Dashboard</h1>
-            <button class="btn-export" onclick="exportTableToExcel()"><i class="fa-solid fa-file-excel"></i> Export to Excel</button>
+            <div>
+                <h1>Applications Processing Engine</h1>
+                <p id="last-updated">Synchronizing record matrices...</p>
+            </div>
+            <button class="btn-export" onclick="exportTableToExcel()"><i class="fa-solid fa-file-excel"></i> Export Matrix to Excel</button>
         </div>
 
         <div class="page-body">
             <div class="stats-grid">
-                <div class="stat-card"><div><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total</div></div></div>
-                <div class="stat-card"><div><div class="stat-num" id="stat-pending">—</div><div class="stat-label">Pending</div></div></div>
-                <div class="stat-card"><div><div class="stat-num" id="stat-completed">—</div><div class="stat-label">Completed</div></div></div>
+                <div class="stat-card"><div><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Volume</div></div></div>
+                <div class="stat-card"><div><div class="stat-num" id="stat-pending">—</div><div class="stat-label">Pending Review</div></div></div>
+                <div class="stat-card"><div><div class="stat-num" id="stat-completed">—</div><div class="stat-label">Dispatched</div></div></div>
                 <div class="stat-card"><div><div class="stat-num" id="stat-rejected">—</div><div class="stat-label">Rejected</div></div></div>
             </div>
 
             <div class="filters-bar">
                 <div class="search-wrap">
-                    <input class="search-input" id="searchInput" type="text" placeholder="Search..." oninput="filterTable()">
+                    <input class="search-input" id="searchInput" type="text" placeholder="Search by name, phone..." oninput="filterTable()">
                 </div>
             </div>
 
@@ -83,8 +86,8 @@
                             <th>App ID</th>
                             <th>Applicant</th>
                             <th>Service Type</th>
-                            <th>Documents</th>
-                            <th>Status</th>
+                            <th>Secure Documents Logs</th>
+                            <th>Workflow Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -101,8 +104,8 @@
             window.location.href = "login.html";
         }
 
-        const BACKEND = ""; // Matches your Render URL
-        const secretKey = localStorage.getItem('admin_secret_key'); // Fetch the stored token
+        const BACKEND = window.location.origin; // Set dynamically to match Render instance domain cleanly
+        const secretToken = localStorage.getItem('admin_secret_token'); // Extract the master credential token
         let allData = [];
         let filteredData = [];
 
@@ -122,7 +125,7 @@
         function renderTable(data) {
             const tbody = document.getElementById('adminTableBody');
             if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No records found.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No records available matching schema criteria.</td></tr>`;
                 return;
             }
 
@@ -130,7 +133,11 @@
                 let docs = '';
                 if (app.photo_path) docs += `<a href="${BACKEND}${app.photo_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-image"></i> Photo</a>`;
                 if (app.aadhaar_path) docs += `<a href="${BACKEND}${app.aadhaar_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-id-card"></i> Aadhaar</a>`;
-                if (app.signature_path) docs += `<a href="${BACKEND}${app.signature_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-pen"></i> Sign</a>`;
+                if (app.signature_path) docs += `<a href="${BACKEND}${app.signature_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-pen-nib"></i> Sign</a>`;
+                if (app.marksheet_path) docs += `<a href="${BACKEND}${app.marksheet_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-file-invoice"></i> Marksheet</a>`;
+                if (app.address_path) docs += `<a href="${BACKEND}${app.address_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-map-location-dot"></i> Address</a>`;
+                if (app.property_path) docs += `<a href="${BACKEND}${app.property_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-file-shield"></i> Property</a>`;
+                if (app.shopphoto_path) docs += `<a href="${BACKEND}${app.shopphoto_path}" target="_blank" class="doc-btn"><i class="fa-solid fa-shop"></i> StoreFront</a>`;
                 if (!docs) docs = `<span>No files</span>`;
 
                 return `
@@ -147,7 +154,7 @@
                             <option value="Rejected" ${app.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
                         </select>
                     </td>
-                    <td><button class="btn-delete" onclick="deleteApplication(${app.id})"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                    <td><button class="btn-delete" onclick="deleteApplication(${app.id})"><i class="fa-solid fa-trash"></i> Drop</button></td>
                 </tr>`;
             }).join('');
         }
@@ -155,14 +162,16 @@
         async function loadApplications() {
             try {
                 const res = await fetch(`${BACKEND}/admin/applications`, {
-                    headers: { 'x-admin-key': secretKey } // INJECTED SECURE HEADER
+                    headers: { 'x-admin-key': secretToken } // SECURE HANDSHAKE INJECTED
                 });
+                if(!res.ok) throw new Error();
                 allData = await res.json();
                 filteredData = [...allData];
                 updateStats(allData);
                 renderTable(filteredData);
+                document.getElementById('last-updated').textContent = `Sync Active: ${new Date().toLocaleTimeString()}`;
             } catch (err) {
-                showToast('Failed to load applications from server.');
+                showToast('Handshake error: cannot retrieve applications cluster.');
             }
         }
 
@@ -170,28 +179,31 @@
             try {
                 const res = await fetch(`${BACKEND}/admin/applications/${id}/status`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'x-admin-key': secretKey }, // INJECTED SECURE HEADER
+                    headers: { 'Content-Type': 'application/json', 'x-admin-key': secretToken }, // SECURE HANDSHAKE INJECTED
                     body: JSON.stringify({ status: newStatus })
                 });
-                if (res.ok) showToast('Status updated successfully.');
+                if (res.ok) {
+                    showToast('Status modified down-funnel.');
+                    loadApplications();
+                }
             } catch (err) {
-                showToast('Failed to change status.');
+                showToast('Failed to modify status.');
             }
         }
 
         async function deleteApplication(id) {
-            if (!confirm('Permanently remove application?')) return;
+            if (!confirm('Purge application file from data store?')) return;
             try {
                 const res = await fetch(`${BACKEND}/admin/applications/${id}`, {
                     method: 'DELETE',
-                    headers: { 'x-admin-key': secretKey } // INJECTED SECURE HEADER
+                    headers: { 'x-admin-key': secretToken } // SECURE HANDSHAKE INJECTED
                 });
                 if (res.ok) {
                     loadApplications();
-                    showToast('Application deleted.');
+                    showToast('Application drop complete.');
                 }
             } catch (err) {
-                showToast('Delete operation failed.');
+                showToast('Delete operation dropped.');
             }
         }
 

@@ -34,46 +34,56 @@
     <div class="login-box">
         <div class="login-box-header">
             <h3>Admin Panel Sign In</h3>
-            <p>Enter your authorization key to authenticate</p>
+            <p>Enter your system credentials to authenticate</p>
         </div>
         <div id="errorBox" class="error-msg">
             <i class="fa fa-circle-exclamation"></i>
-            <span id="errorText">Invalid Security Key.</span>
+            <span id="errorText">Invalid authorization credentials.</span>
         </div>
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label for="password">Admin Secret Key (ADMIN_SECRET)</label>
+                <label for="username">Username</label>
+                <div class="input-wrap">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" class="form-input" placeholder="admin" required autocomplete="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Admin Secret Key</label>
                 <div class="input-wrap">
                     <i class="fa fa-lock"></i>
-                    <input type="password" id="password" class="form-input" placeholder="Enter secret key from .env" required>
+                    <input type="password" id="password" class="form-input" placeholder="Enter ADMIN_SECRET string" required autocomplete="current-password">
                 </div>
             </div>
             <button type="submit" class="btn-login" id="loginBtn">
-                <i class="fa fa-shield-halved"></i> Authenticate
+                <i class="fa fa-shield-halved"></i> Verify Security Clearance
             </button>
         </form>
     </div>
+
     <script>
         async function handleLogin(event) {
             event.preventDefault();
+            const user = document.getElementById('username').value.trim();
             const key = document.getElementById('password').value.trim();
-            const BACKEND = ""; // Dynamic relative routing for Render
+            const BACKEND = window.location.origin; // Dynamically assigns your live URL on Render
 
             try {
-                // Verify the key directly against the server health check or applications endpoint
+                // Securely test token verification against backend admin logic
                 const res = await fetch(`${BACKEND}/admin/applications`, {
                     headers: { 'x-admin-key': key }
                 });
 
-                if (res.ok) {
+                // Grant entrance only if username fits and server returns a valid HTTP 200 array
+                if (res.ok && user === "admin") {
                     localStorage.setItem('admin_session', 'authenticated_true');
-                    localStorage.setItem('admin_secret_key', key); // Save key securely for admin page requests
+                    localStorage.setItem('admin_secret_token', key); // Stores key safely for downstream headers
                     window.location.href = "admin.html";
                 } else {
                     document.getElementById('errorBox').classList.add('show');
                 }
             } catch (err) {
-                alert("Cannot connect to server. Ensure your Render service is running.");
+                alert("Network communication error. Verify your Render service deployment is active.");
             }
         }
     </script>
