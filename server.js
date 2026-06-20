@@ -25,13 +25,13 @@ const PORT = process.env.PORT || 3000;
    SECURITY & POLICY MIDDLEWARE
 ────────────────────────────────────────── */
 
-// Enforces secure HTTP headers (XSS, clickjacking, MIME sniffing, etc.)
+// Enforces secure HTTP headers (XSS, clickjacking, etc.)
 // Content Security Policy adjusted to allow external CDNs utilized by your templates
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "www.gstatic.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "www.gstatic.com", "cdnjs.cloudflare.com"],
             styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "cdnjs.cloudflare.com"],
             fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "*"],
@@ -414,13 +414,14 @@ app.use((err, _req, res, next) => {
     next(err);
 });
 
+// Handle custom 404 falling past API checks to serve frontend fallback links smoothly
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.use((err, _req, res, _next) => {
     console.error('[Global Runtime Panic Trap]', err);
     res.status(500).json({ error: 'An unexpected application processing exception occurred.' });
-});
-
-app.use((_req, res) => {
-    res.status(404).json({ error: 'Resource path not found in cluster configuration.' });
 });
 
 /* ──────────────────────────────────────────
