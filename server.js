@@ -450,3 +450,13 @@ async function shutdown(signal) {
 
 process.on('SIGINT',  () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
+/* ──────────────────────────────────────────
+   STATIC FILES
+────────────────────────────────────────── */
+// ADD THIS LINE: This forces Express to serve your static HTML files
+app.use(express.static(__dirname));
+
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+
+app.use('/uploads', express.static(UPLOADS_DIR));
