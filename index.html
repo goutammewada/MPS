@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Online Services | State Registration & Certificate Gateway</title>
+    <title>MP Online Services | Official State Registration & Certificate Gateway</title>
     <!-- Premium Professional Typography & Iconography -->
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -209,13 +209,6 @@
             transition: var(--transition);
         }
         .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
-        
-        .hero-stats {
-            display: flex; gap: 40px; margin-top: 48px;
-            padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .hero-stat-num { font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-        .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 6px; font-weight: 500; }
 
         /* Hero Lateral Quick Launch Console */
         .hero-panel {
@@ -279,18 +272,11 @@
         .mini-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--navy-secondary); background: #FFFFFF; }
         .mini-card .mc-icon { font-size: 24px; transition: var(--transition); }
         
-        /* Corporate Colour Assignment Profiles */
+        /* Colour Assignment Profiles */
         .mc-teal:hover .mc-icon { color: #0F6E56; }
-        .mc-purple:hover .mc-icon { color: #4A36B0; }
-        .mc-olive:hover .mc-icon { color: #4A5E1A; }
-        .mc-amber:hover .mc-icon { color: #B84D06; }
-        .mc-navy:hover .mc-icon { color: #0B2545; }
-        .mc-green:hover .mc-icon { color: #1A6B3C; }
-        .mc-crimson:hover .mc-icon { color: #99162A; }
-        .mc-indigo:hover .mc-icon { color: #3730A3; }
         .mc-gold:hover .mc-icon { color: #8B6200; }
-        .mc-rose:hover .mc-icon { color: #C0392B; }
-        .mc-slate:hover .mc-icon { color: #334155; }
+        .mc-amber:hover .mc-icon { color: #B84D06; }
+        .mc-crimson:hover .mc-icon { color: #99162A; }
 
         /* ── POPULAR MATRIX CONSOLE ── */
         .featured-section { background: #F4F6FA; }
@@ -325,10 +311,10 @@
         .link-navy:hover { background: #D9E5F2; }
         .link-green { color: var(--success-green); background: var(--success-light); }
         .link-green:hover { background: #D4EDDF; }
-        .link-purple { color: #4A36B0; background: #F0EEFF; }
-        .link-purple:hover { background: #DDD9F7; }
         .link-saffron { color: var(--saffron-brand); background: var(--saffron-light); }
         .link-saffron:hover { background: #FDDCCC; }
+        .link-gold { color: #8B6200; background: #FFF9E6; }
+        .link-gold:hover { background: #FFE699; }
         
         .feat-card-tag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px; }
 
@@ -351,7 +337,7 @@
             pointer-events: none; z-index: 0;
         }
 
-        /* ── INSTITUTIONAL IDENTITY FRAME ── */
+        /* ── OFFICIAL IDENTITY FRAME ── */
         .about-section { background: linear-gradient(135deg, var(--navy-primary) 0%, #06182B 100%); position: relative; }
         .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
         .about-content h2 { font-size: 34px; font-weight: 700; color: #FFFFFF; line-height: 1.2; margin-bottom: 24px; letter-spacing: -0.5px; }
@@ -390,7 +376,7 @@
         .footer-bottom .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 12px; margin-left: 20px; transition: var(--transition); }
         .footer-bottom .footer-legal a:hover { color: #FFFFFF; }
 
-        /* ── RESPONSIVE RESPONSIVENESS MATRIX ── */
+        /* ── RESPONSIVE MATRIX ── */
         @media (max-width: 1024px) {
             .hero-inner { grid-template-columns: 1fr; }
             .hero-panel { display: none; }
@@ -407,7 +393,6 @@
             .section-title { font-size: 26px; }
             .steps-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-            .hero-stats { gap: 24px; justify-content: space-between; }
         }
     </style>
 </head>
@@ -433,13 +418,13 @@
                 <div class="brand-logo">MP</div>
                 <div class="brand-text">
                     <h1>MP Online Services</h1>
-                    <p>State Digital Consultancy Platform</p>
+                    <p>Official State Verification & Registration Gateway</p>
                 </div>
             </a>
             <nav>
                 <ul>
                     <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="#services">Services Workspace</a></li>
+                    <li><a href="#services">Services Registry</a></li>
                     <li><a href="track.html"><i class="fa-solid fa-magnifying-glass"></i> Track Status</a></li>
                     <li><a href="login.html" class="nav-cta"><i class="fa-solid fa-lock"></i> Admin Login</a></li>
                 </ul>
@@ -451,110 +436,64 @@
     <section class="hero">
         <div class="hero-inner">
             <div class="hero-content">
-                <div class="hero-badge"><i class="fa-solid fa-circle-check"></i> Verified Consultancy Framework</div>
-                <h2>Madhya Pradesh's Secure<br><em>Online Registration</em> System</h2>
-                <p>Streamline corporate registrations, state-issued certificates, and compliance documentation via optimized pipeline models managed by professionals.</p>
+                <div class="hero-badge"><i class="fa-solid fa-circle-check"></i> Authorized State Portal Framework</div>
+                <h2>Madhya Pradesh's Secure<br><em>Official Registration</em> System</h2>
+                <p>Streamline state-issued certificates, business compliance, and citizen identification records securely via the automated state verification gateway.</p>
                 <div class="hero-actions">
                     <a href="#services" class="btn-primary">Explore Service Registry <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="track.html" class="btn-outline"><i class="fa-solid fa-magnifying-glass"></i> Track Audit Status</a>
-                </div>
-                <div class="hero-stats">
-                    <div>
-                        <div class="hero-stat-num">12,000+</div>
-                        <div class="hero-stat-label">Records Managed</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-num">15+</div>
-                        <div class="hero-stat-label">Active Modules</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-num">24-72h</div>
-                        <div class="hero-stat-label">Processing Interval</div>
-                    </div>
+                    <a href="track.html" class="btn-outline"><i class="fa-solid fa-magnifying-glass"></i> Track Application Status</a>
                 </div>
             </div>
             <div class="hero-panel">
-                <h4>Express Pipelines</h4>
-                <a href="pan-form.html" class="quick-link">
-                    <span><i class="fa-solid fa-address-card ql-icon"></i> &nbsp;PAN Card Registration</span>
+                <h4>Express Processing Pipelines</h4>
+                <a href="#" class="quick-link">
+                    <span><i class="fa-solid fa-industry ql-icon"></i> &nbsp;Udyam MSME Registration</span>
                     <i class="fa-solid fa-chevron-right ql-arrow"></i>
                 </a>
-                <a href="gumasta-form.html" class="quick-link">
-                    <span><i class="fa-solid fa-shop ql-icon"></i> &nbsp;Gumasta Establishment</span>
+                <a href="#" class="quick-link">
+                    <span><i class="fa-solid fa-user-shield ql-icon"></i> &nbsp;Character Certificate</span>
                     <i class="fa-solid fa-chevron-right ql-arrow"></i>
                 </a>
                 <a href="#" class="quick-link">
                     <span><i class="fa-solid fa-house-chimney ql-icon"></i> &nbsp;Domicile Certificate</span>
                     <i class="fa-solid fa-chevron-right ql-arrow"></i>
                 </a>
-                <a href="#" class="quick-link">
-                    <span><i class="fa-solid fa-id-card-clip ql-icon"></i> &nbsp;Caste Certificate</span>
+                <a href="pan-form.html" class="quick-link">
+                    <span><i class="fa-solid fa-address-card ql-icon"></i> &nbsp;PAN Card Pipeline</span>
                     <i class="fa-solid fa-chevron-right ql-arrow"></i>
                 </a>
                 <div class="trust-badges">
                     <span class="trust-badge"><i class="fa-solid fa-shield-halved"></i> 256-bit SSL</span>
-                    <span class="trust-badge"><i class="fa-solid fa-server"></i> Encrypted Pool</span>
+                    <span class="trust-badge"><i class="fa-solid fa-server"></i> Govt. Secure Pool</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ALL SERVICES UTILITY MATRICES -->
+    <!-- ALL SERVICES MATRIX -->
     <section id="services" class="services-section">
         <div class="container">
             <div class="section-head">
-                <div class="section-label">Service Matrix</div>
-                <h2 class="section-title"> Govt. Registrations & Certificates</h2>
-                <p class="section-desc">Select the Required services and fill up the registration form.</p>
+                <div class="section-label">State Service Grid</div>
+                <h2 class="section-title">Official Registrations & Certificates</h2>
+                <p class="section-desc">Select the required active service segment below to open the dedicated application window.</p>
             </div>
             <div class="mini-grid">
                 <a href="#" class="mini-card mc-teal">
                     <i class="fa-solid fa-industry mc-icon" style="color: #0F6E56;"></i>
-                    Udyam Certificate
-                </a>
-                <a href="#" class="mini-card mc-purple">
-                    <i class="fa-solid fa-briefcase mc-icon" style="color: #4A36B0;"></i>
-                    Swarojgar Yojana
-                </a>
-                <a href="#" class="mini-card mc-olive">
-                    <i class="fa-solid fa-rocket mc-icon" style="color: #4A5E1A;"></i>
-                    Yuva Udyami
-                </a>
-                <a href="#" class="mini-card mc-amber">
-                    <i class="fa-solid fa-hand-holding-dollar mc-icon" style="color: #B84D06;"></i>
-                    PMEGP Loan
-                </a>
-                <a href="#" class="mini-card mc-navy">
-                    <i class="fa-solid fa-heart-pulse mc-icon" style="color: #0B2545;"></i>
-                    Marriage Registration
-                </a>
-                <a href="#" class="mini-card mc-green">
-                    <i class="fa-solid fa-building-shield mc-icon" style="color: #1A6B3C;"></i>
-                    Firm Registration
-                </a>
-                <a href="pan-form.html" class="mini-card mc-crimson">
-                    <i class="fa-solid fa-address-card mc-icon" style="color: #99162A;"></i>
-                    PAN Card System
-                </a>
-                <a href="gumasta-form.html" class="mini-card mc-indigo">
-                    <i class="fa-solid fa-shop mc-icon" style="color: #3730A3;"></i>
-                    Gumasta Registration
-                </a>
-                <a href="#" class="mini-card mc-rose">
-                    <i class="fa-solid fa-house-medical mc-icon" style="color: #C0392B;"></i>
-                    Clinic Registration
+                    Udyam MSME Registration
                 </a>
                 <a href="#" class="mini-card mc-gold">
                     <i class="fa-solid fa-user-shield mc-icon" style="color: #8B6200;"></i>
-                    Character Clearance
-                </a>
-                <a href="#" class="mini-card mc-teal">
-                    <i class="fa-solid fa-house-chimney mc-icon" style="color: #0F6E56;"></i>
-                    Domicile Certificate
+                    Character Certificate
                 </a>
                 <a href="#" class="mini-card mc-amber">
-                    <i class="fa-solid fa-utensils mc-icon" style="color: #B84D06;"></i>
-                    Food License (FSSAI)
+                    <i class="fa-solid fa-house-chimney mc-icon" style="color: #B84D06;"></i>
+                    Domicile Certificate
+                </a>
+                <a href="pan-form.html" class="mini-card mc-crimson">
+                    <i class="fa-solid fa-address-card mc-icon" style="color: #99162A;"></i>
+                    PAN Card Pipeline
                 </a>
             </div>
         </div>
@@ -564,11 +503,39 @@
     <section class="featured-section">
         <div class="container">
             <div class="section-head">
-                <div class="section-label">High-Volume Request Vectors</div>
-                <h2 class="section-title">Core Institutional Applications</h2>
-                <p class="section-desc">Ecosystem entry points managed under precise service SLAs with state compliance parameters.</p>
+                <div class="section-label">Active Standard Request Pipelines</div>
+                <h2 class="section-title">Core Gateway Applications</h2>
+                <p class="section-desc">Ecosystem interfaces configured under strict state service level timelines.</p>
             </div>
             <div class="featured-grid">
+
+                <div class="feat-card">
+                    <div class="feat-card-top">
+                        <div class="feat-icon-wrap" style="background:#EDFAEE; color:#1A6B3C;">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        <span class="feat-card-tag" style="background:#EDFAEE; color:#1A6B3C;">1-2 Days SLA</span>
+                    </div>
+                    <div class="feat-card-body">
+                        <h3>Udyam MSME Registration</h3>
+                        <p>Official registration platform tracking micro, small, and medium business entities for state credit schemes and enterprise protections.</p>
+                        <a href="#" class="feat-card-link link-green">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-card-top">
+                        <div class="feat-icon-wrap" style="background:#FFF9E6; color:#8B6200;">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <span class="feat-card-tag" style="background:#FFF9E6; color:#8B6200;">3-5 Days SLA</span>
+                    </div>
+                    <div class="feat-card-body">
+                        <h3>Character Certificate</h3>
+                        <p>Formal law enforcement verification data handling for professional employment onboarding, institutional audits, and background clearances.</p>
+                        <a href="#" class="feat-card-link link-gold">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
+                    </div>
+                </div>
 
                 <div class="feat-card">
                     <div class="feat-card-top">
@@ -579,36 +546,8 @@
                     </div>
                     <div class="feat-card-body">
                         <h3>Domicile Certificate</h3>
-                        <p>Standardized residential state verification metrics required for public employment grids and academic placement processing windows.</p>
+                        <p>Standardized residential state verification records required for public employment placement models and local state educational quotas.</p>
                         <a href="#" class="feat-card-link link-navy">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
-                    </div>
-                </div>
-
-                <div class="feat-card">
-                    <div class="feat-card-top">
-                        <div class="feat-icon-wrap" style="background:#EDFAEE; color:#1A6B3C;">
-                            <i class="fa-solid fa-id-card"></i>
-                        </div>
-                        <span class="feat-card-tag" style="background:#EDFAEE; color:#1A6B3C;">5–7 Days SLA</span>
-                    </div>
-                    <div class="feat-card-body">
-                        <h3>Caste Profile Mapping</h3>
-                        <p>Formalized citizen segment classification processing records tracking state-sponsored verification vectors securely.</p>
-                        <a href="#" class="feat-card-link link-green">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
-                    </div>
-                </div>
-
-                <div class="feat-card">
-                    <div class="feat-card-top">
-                        <div class="feat-icon-wrap" style="background:#F0EEFF; color:#4A36B0;">
-                            <i class="fa-solid fa-shop"></i>
-                        </div>
-                        <span class="feat-card-tag" style="background:#F0EEFF; color:#4A36B0;">1–2 Days SLA</span>
-                    </div>
-                    <div class="feat-card-body">
-                        <h3>Gumasta Establishment</h3>
-                        <p>Statutory business licensing and clearance frameworks for commercial retail shops and business entities across MP.</p>
-                        <a href="gumasta-form.html" class="feat-card-link link-purple">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
                     </div>
                 </div>
 
@@ -621,7 +560,7 @@
                     </div>
                     <div class="feat-card-body">
                         <h3>PAN Card Pipeline</h3>
-                        <p>Structured transactional tracking tax identifier setups, modifications, reprints, and corrections for corporate/private taxpayers.</p>
+                        <p>Structured transactional tracking for tax identifier allocation, modification profiles, reprints, and corrections for public citizens.</p>
                         <a href="pan-form.html" class="feat-card-link link-saffron">Initialize Entry <i class="fa-solid fa-chevron-right fa-xs"></i></a>
                     </div>
                 </div>
@@ -634,45 +573,45 @@
     <section class="steps-section">
         <div class="container">
             <div class="section-head">
-                <div class="section-label">Ecosystem Workflow</div>
+                <div class="section-label">Citizen Workflow</div>
                 <h2 class="section-title">Linear Pipeline Execution</h2>
-                <p class="section-desc">Four functional engineering nodes covering record initiation up to digital dispatch.</p>
+                <p class="section-desc">Four standardized pipeline phases covering profile entry up to document retrieval.</p>
             </div>
             <div class="steps-grid">
                 <div class="steps-connector"></div>
                 <div class="step-card">
                     <div class="step-num">01</div>
                     <h4>Module Selection</h4>
-                    <p>Map out the precise certificate, payload type, or corporate entity clearance tool necessary.</p>
+                    <p>Isolate the specific active certificate or identity tracking tool required for entry.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-num" style="background: var(--saffron-brand);">02</div>
                     <h4>Payload Compilation</h4>
-                    <p>Provide contact points, structural configurations, and clear digital document binary attachments safely.</p>
+                    <p>Provide verified identification data and relevant digital scan attachments cleanly.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-num">03</div>
-                    <h4>Audit Verification</h4>
-                    <p>Monitor transaction progression pipelines in real time using the compiled transactional reference tracking ID.</p>
+                    <h4>Verification Audit</h4>
+                    <p>Track application validation streams securely using your unique tracking identifier token.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-num" style="background: var(--success-green);">04</div>
                     <h4>Digital Fulfillment</h4>
-                    <p>Retrieve the verified electronic documentation file straight from the portal database vault.</p>
+                    <p>Download your verified state-approved document straight from the secure gateway database.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT INSTITUTIONAL PANEL -->
+    <!-- OFFICIAL GOVERNMENT PORTAL IDENTITY PANEL -->
     <section class="about-section">
         <div class="container">
             <div class="about-inner">
                 <div class="about-content">
-                    <div class="section-label" style="color:#F5A875;">Corporate Matrix</div>
-                    <h2>Engineered for Enterprise & Citizen Compliance</h2>
-                    <p>MP Online Services acts as an authorized structural intermediary system reducing administrative bottlenecks for technical business infrastructures, manufacturing outfits, and residents.</p>
-                    <p>Our platform enforces clear separation of data collection mechanisms, bank-grade encryption protocols, and verified consultancies to complete registrations without requiring face-to-face friction points.</p>
+                    <div class="section-label" style="color:#F5A875;">Official Portal Infrastructure</div>
+                    <h2>Engineered for Strict State Compliance</h2>
+                    <p>MP Online Services serves as an official technical intermediary platform designed to minimize bureaucratic friction for citizens, local residents, and regional businesses.</p>
+                    <p>By employing secure architecture, automated data pipelines, and database processing rules, we eliminate physical gatekeeping constraints to provide quick, structured document delivery.</p>
                 </div>
                 <div class="about-features">
                     <div class="about-feat">
@@ -680,8 +619,8 @@
                             <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <div>
-                            <h5>Structural Data Encryption</h5>
-                            <p>End-to-end socket channels protect citizen information records from multi-layered exposure vectors.</p>
+                            <h5>Bank-Grade Citizen Data Safety</h5>
+                            <p>End-to-end operational socket layers guarantee your records are safe from standard leak vectors.</p>
                         </div>
                     </div>
                     <div class="about-feat">
@@ -689,8 +628,8 @@
                             <i class="fa-solid fa-bolt"></i>
                         </div>
                         <div>
-                            <h5>Accelerated Request Dispatches</h5>
-                            <p>Direct database pool tracking guarantees rapid escalation pathways through the back-office nodes.</p>
+                            <h5>Rapid Automated Dispatch</h5>
+                            <p>Direct pipeline mapping routes applications immediately to validation nodes for fast processing turnaround.</p>
                         </div>
                     </div>
                     <div class="about-feat">
@@ -698,8 +637,8 @@
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
                         <div>
-                            <h5>Professional Advisory Oversight</h5>
-                            <p>Every single record block undergoes manual configuration audits to prevent submission rejection flags.</p>
+                            <h5>System Audited Submissions</h5>
+                            <p>Every dataset undergoes validation algorithms prior to structural locking to minimize potential processing rejections.</p>
                         </div>
                     </div>
                 </div>
@@ -713,7 +652,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3>MP Online Services</h3>
-                    <p>An official technical consultancy and registration automated workspace running on isolated backend relational pool matrices across Madhya Pradesh.</p>
+                    <p>An official state digital certificate and registration processing engine operating across dedicated security groups within Madhya Pradesh.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Operations Base</h4>
@@ -724,17 +663,17 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Navigation Node Logs</h4>
+                    <h4>Gateway Navigation Logs</h4>
                     <ul>
-                        <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Service Matrix</a></li>
-                        <li><a href="track.html"><i class="fa-solid fa-chevron-right"></i> Audit Status Tracking</a></li>
-                        <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Admin Authentication Console</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Data Privacy Policy</a></li>
+                        <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Official Service Registry</a></li>
+                        <li><a href="track.html"><i class="fa-solid fa-chevron-right"></i> Track Application Status</a></li>
+                        <li><a href="login.html"><i class="fa-solid fa-chevron-right"></i> Administration Console</a></li>
+                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Privacy & Data Policy</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 MP Online Services. Infrastructure optimization complete.</p>
+                <p>&copy; 2026 MP Online Services. Official State Digital Portal Network.</p>
                 <div class="footer-legal">
                     <a href="#">Privacy Agreement</a>
                     <a href="#">Terms of Compliance</a>
